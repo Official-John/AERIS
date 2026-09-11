@@ -1,0 +1,76 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>AERIS campaign report</title>
+<style>
+:root { color-scheme: light;
+  --page:#f9f9f7; --surface:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --muted:#898781;
+  --grid:#e1e0d9; --axis:#c3c2b7; --border:rgba(11,11,11,.10);
+  --series-c:#2a78d6; --series-a:#eb6834; --series-b:#1baf7a; --plan:#898781;
+  --good:#0ca30c; --warning:#fab219; --serious:#ec835a; --critical:#d03b3b; --unknown:#b5b3ab;
+  --seq-0:#f0efec; --seq-1:#cde2fb; --seq-2:#86b6ef; --seq-3:#3987e5; --seq-4:#1c5cab; --seq-5:#0d366b;
+  --seq-ink-hi:#ffffff; }
+@media (prefers-color-scheme: dark) { :root { color-scheme: dark;
+  --page:#0d0d0d; --surface:#1a1a19; --ink:#ffffff; --ink2:#c3c2b7; --muted:#898781;
+  --grid:#2c2c2a; --axis:#383835; --border:rgba(255,255,255,.10);
+  --series-c:#3987e5; --series-a:#d95926; --series-b:#199e70; --unknown:#5f5e59;
+  --seq-0:#262624; --seq-1:#104281; --seq-2:#1c5cab; --seq-3:#2a78d6; --seq-4:#6da7ec; --seq-5:#cde2fb;
+  --seq-ink-hi:#0b0b0b; } }
+* { box-sizing: border-box; }
+body { margin:0; background:var(--page); color:var(--ink);
+  font:14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+main { max-width: 1180px; margin: 0 auto; padding: 28px 20px 60px; }
+h1 { font-size: 24px; margin: 0 0 4px; } h2 { font-size: 17px; margin: 32px 0 10px; }
+p.lede { color: var(--ink2); margin: 0 0 18px; max-width: 80ch; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; }
+.tile .k { color: var(--ink2); font-size: 12px; } .tile .v { font-size: 22px; font-weight: 600; }
+.tile .s { color: var(--muted); font-size: 12px; }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+th { color: var(--ink2); font-weight: 600; font-size: 12px; }
+.scroll { overflow-x: auto; }
+.legend { display:flex; gap:16px; flex-wrap:wrap; color:var(--ink2); font-size:12px; margin:6px 0; }
+.sw { display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:-2px; margin-right:6px; }
+.pass { color: var(--good); font-weight: 600; } .fail { color: var(--critical); font-weight: 600; }
+.muted { color: var(--muted); } code { font-size: 12.5px; white-space: nowrap; }
+</style></head><body><main>
+<h1>AERIS fault campaign</h1>
+<p class="lede">Every scenario was flown three times with the same seed: <b>A</b> baseline autopilot only,
+<b>B</b> AERIS watching (advisory), <b>C</b> AERIS in control. Detection figures come from B, outcomes compare A with C.
+All figures use the held-out evaluation split. Code fc3e383-dirty, AERIS config d321873563.
+The baseline is a simplified PX4-like stand-in, not PX4 itself.</p>
+<div class="tiles"><div class='card tile'><div class='k'>Flights flown</div><div class='v'>1200</div><div class='s'>1200 scenarios × configs B</div></div><div class='card tile'><div class='k'>Evaluation flights</div><div class='v'>840</div><div class='s'>held-out seeds only</div></div><div class='card tile'><div class='k'>Wall time</div><div class='v'>6.1 min</div><div class='s'>11 parallel workers</div></div><div class='card tile'><div class='k'>False alarms</div><div class='v'>2</div><div class='s'>in 28.1 fault-free flight hours</div></div><div class='card tile'><div class='k'>AERIS step time</div><div class='v'>0.1347 ms</div><div class='s'>worst 1124.1384 ms of a 20 ms budget</div></div></div>
+
+<h2>Requirement checks</h2>
+<div class="card scroll"><table><tr><th>Requirement</th><th>Result</th><th>Evidence</th></tr><tr><td><code>AERIS-REQ-FDIR-001</code></td><td class='muted'>not evaluated</td><td>GPS stale declared in 0/0 GPS-outage runs; worst latency None s (limit 0.5 s)</td></tr><tr><td><code>AERIS-REQ-FDIR-003</code></td><td class='muted'>not evaluated</td><td>drift &gt;= 0.5 m/s detected within 20 s in 0/0 runs (None , 95% CI None-None); target &gt;= 0.95</td></tr><tr><td><code>AERIS-REQ-FDIR-004</code></td><td class='pass'>PASS</td><td>2 false alarms in 28.146 fault-free flight hours = 0.0711/h (95% CI 0.008-0.2565); target &lt; 0.1/h. Note: proving &lt; 0.1/h with confidence needs &gt; 30 clean hours.</td></tr><tr><td><code>AERIS-REQ-SYS-001</code></td><td class='pass'>PASS</td><td>95 deadline misses in 5066289 steps (worst p99 0.8542 ms, worst 1124.1384 ms; budget 20 ms)</td></tr></table></div>
+
+<h2>Mission outcome: baseline against AERIS</h2>
+<div class="grid2">
+<div class="card"><b>Mission success</b> <span class="muted">(all waypoints within 3 m, landed within 5 m of home)</span><div class='legend'><span><span class='sw' style='background:var(--series-c)'></span>AERIS active (C)</span><span><span class='sw' style='background:var(--series-a)'></span>Baseline autopilot (A)</span><span class='muted'>line = 95% confidence interval</span></div><svg viewBox="0 0 560 68" width="100%" role="img" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="12"><line x1="150.0" x2="150.0" y1="8" y2="46" stroke="var(--grid)"/><text x="150.0" y="60" text-anchor="middle" fill="var(--muted)">0%</text><line x1="237.5" x2="237.5" y1="8" y2="46" stroke="var(--grid)"/><text x="237.5" y="60" text-anchor="middle" fill="var(--muted)">25%</text><line x1="325.0" x2="325.0" y1="8" y2="46" stroke="var(--grid)"/><text x="325.0" y="60" text-anchor="middle" fill="var(--muted)">50%</text><line x1="412.5" x2="412.5" y1="8" y2="46" stroke="var(--grid)"/><text x="412.5" y="60" text-anchor="middle" fill="var(--muted)">75%</text><line x1="500.0" x2="500.0" y1="8" y2="46" stroke="var(--grid)"/><text x="500.0" y="60" text-anchor="middle" fill="var(--muted)">100%</text><text x="142" y="29.0" text-anchor="end" fill="var(--ink2)">No fault</text></svg></div>
+<div class="card"><b>Safe landing</b> <span class="muted">(landed gently, no geofence breach, no crash)</span><div class='legend'><span><span class='sw' style='background:var(--series-c)'></span>AERIS active (C)</span><span><span class='sw' style='background:var(--series-a)'></span>Baseline autopilot (A)</span><span class='muted'>line = 95% confidence interval</span></div><svg viewBox="0 0 560 68" width="100%" role="img" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="12"><line x1="150.0" x2="150.0" y1="8" y2="46" stroke="var(--grid)"/><text x="150.0" y="60" text-anchor="middle" fill="var(--muted)">0%</text><line x1="237.5" x2="237.5" y1="8" y2="46" stroke="var(--grid)"/><text x="237.5" y="60" text-anchor="middle" fill="var(--muted)">25%</text><line x1="325.0" x2="325.0" y1="8" y2="46" stroke="var(--grid)"/><text x="325.0" y="60" text-anchor="middle" fill="var(--muted)">50%</text><line x1="412.5" x2="412.5" y1="8" y2="46" stroke="var(--grid)"/><text x="412.5" y="60" text-anchor="middle" fill="var(--muted)">75%</text><line x1="500.0" x2="500.0" y1="8" y2="46" stroke="var(--grid)"/><text x="500.0" y="60" text-anchor="middle" fill="var(--muted)">100%</text><text x="142" y="29.0" text-anchor="end" fill="var(--ink2)">No fault</text></svg></div>
+</div>
+<div class="card scroll" style="margin-top:16px"><table>
+<tr><th>Fault</th><th>n</th><th>Mission success A</th><th>Mission success C</th><th>Safe landing A</th><th>Safe landing C</th>
+<th>Crash A</th><th>Crash C</th><th>Median landing distance A</th><th>… C</th></tr></table></div>
+
+<h2>Detection and diagnosis (advisory runs)</h2>
+<div class="grid2">
+<div class="card"><b>Time to detect</b> <span class="muted">(filled dot = median, open dot = 95th percentile; log scale)</span><svg viewBox="0 0 560 36" width="100%" role="img" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="12"><line x1="187.1" x2="187.1" y1="8" y2="14" stroke="var(--grid)"/><text x="187.1" y="28" text-anchor="middle" fill="var(--muted)">0.1 s</text><line x1="246.0" x2="246.0" y1="8" y2="14" stroke="var(--grid)"/><text x="246.0" y="28" text-anchor="middle" fill="var(--muted)">0.3 s</text><line x1="310.6" x2="310.6" y1="8" y2="14" stroke="var(--grid)"/><text x="310.6" y="28" text-anchor="middle" fill="var(--muted)">1 s</text><line x1="369.4" x2="369.4" y1="8" y2="14" stroke="var(--grid)"/><text x="369.4" y="28" text-anchor="middle" fill="var(--muted)">3 s</text><line x1="434.0" x2="434.0" y1="8" y2="14" stroke="var(--grid)"/><text x="434.0" y="28" text-anchor="middle" fill="var(--muted)">10 s</text><line x1="492.9" x2="492.9" y1="8" y2="14" stroke="var(--grid)"/><text x="492.9" y="28" text-anchor="middle" fill="var(--muted)">30 s</text></svg></div>
+<div class="card scroll"><table><tr><th>Fault</th><th>n</th><th>Detected</th><th>Median latency</th><th>95th pct</th><th>Correctly diagnosed</th></tr></table></div>
+</div>
+
+<h2>Confusion matrix</h2>
+<p class="lede">Rows are the fault really injected, columns what AERIS concluded. A perfect result is a diagonal. "none" means nothing was confirmed.</p>
+<div class="card scroll"><table><tr><th>injected ↓ / diagnosed →</th><th>none</th></tr></table></div>
+
+<h2>Detection against fault severity</h2>
+<p class="lede">Small faults hide in sensor noise. A good detector misses only the mildest ones.</p>
+<div class="card scroll"><table><tr><th>Fault</th><th>mildest quarter</th><th>second</th><th>third</th><th>most severe quarter</th></tr></table></div>
+
+<h2>Diagnosis confidence calibration</h2>
+<div class="card scroll"><table><tr><th>Stated confidence</th><th>n</th><th>Mean stated</th><th>Actually correct</th></tr><tr><td>0.00-0.85</td><td>0</td><td>None</td><td>n/a</td></tr><tr><td>0.85-0.95</td><td>0</td><td>None</td><td>n/a</td></tr><tr><td>0.95-1.00</td><td>0</td><td>None</td><td>n/a</td></tr></table></div>
+
+<h2>False alarms</h2>
+<div class="card">2 transitions out of NOMINAL with no active fault, over 28.146 fault-free flight hours:
+0.0711 per hour (95% CI 0.008–0.2565). Diagnosis precision 0% <span class='muted'>(0%–66%)</span>.</div>
+</main></body></html>

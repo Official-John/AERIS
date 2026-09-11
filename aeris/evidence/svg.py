@@ -43,7 +43,7 @@ th { color: var(--ink2); font-weight: 600; font-size: 12px; }
 .legend { display:flex; gap:16px; flex-wrap:wrap; color:var(--ink2); font-size:12px; margin:6px 0; }
 .sw { display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:-2px; margin-right:6px; }
 .pass { color: var(--good); font-weight: 600; } .fail { color: var(--critical); font-weight: 600; }
-.muted { color: var(--muted); } code { font-size: 12.5px; }
+.muted { color: var(--muted); } code { font-size: 12.5px; white-space: nowrap; }
 """
 
 

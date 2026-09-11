@@ -1,0 +1,111 @@
+{
+ "meta": {
+  "flights": 1200,
+  "scenarios": 1200,
+  "configs": [
+   "B"
+  ],
+  "wall_s": 366.7139210700989,
+  "workers": 11,
+  "code_version": "fc3e383-dirty",
+  "config_hash": "d321873563"
+ },
+ "summary": {
+  "split": "evaluation",
+  "runs": 840,
+  "configs": [
+   "B"
+  ],
+  "fault_types": [
+   "none"
+  ],
+  "detection": {},
+  "false_alarms": {
+   "count": 2,
+   "clean_flight_hours": 28.146,
+   "per_hour": [
+    0.0711,
+    0.008,
+    0.2565
+   ]
+  },
+  "diagnosis_precision": [
+   0.0,
+   0.0,
+   0.6576
+  ],
+  "confusion": {
+   "expected": [],
+   "predicted": [
+    "none"
+   ],
+   "counts": {}
+  },
+  "calibration": [
+   {
+    "bin": "0.00-0.85",
+    "n": 0,
+    "mean_confidence": null,
+    "accuracy": [
+     null,
+     null,
+     null
+    ]
+   },
+   {
+    "bin": "0.85-0.95",
+    "n": 0,
+    "mean_confidence": null,
+    "accuracy": [
+     null,
+     null,
+     null
+    ]
+   },
+   {
+    "bin": "0.95-1.00",
+    "n": 0,
+    "mean_confidence": null,
+    "accuracy": [
+     null,
+     null,
+     null
+    ]
+   }
+  ],
+  "detection_vs_severity": {},
+  "outcomes": {
+   "none": {}
+  },
+  "timing": {
+   "runs": 840,
+   "aeris_steps": 5066289,
+   "deadline_misses": 95,
+   "worst_p99_ms": 0.8542,
+   "worst_max_ms": 1124.1384,
+   "mean_ms": 0.1347
+  }
+ },
+ "checks": [
+  {
+   "id": "AERIS-REQ-FDIR-001",
+   "pass": null,
+   "evidence": "GPS stale declared in 0/0 GPS-outage runs; worst latency None s (limit 0.5 s)"
+  },
+  {
+   "id": "AERIS-REQ-FDIR-003",
+   "pass": null,
+   "evidence": "drift >= 0.5 m/s detected within 20 s in 0/0 runs (None , 95% CI None-None); target >= 0.95"
+  },
+  {
+   "id": "AERIS-REQ-FDIR-004",
+   "pass": true,
+   "evidence": "2 false alarms in 28.146 fault-free flight hours = 0.0711/h (95% CI 0.008-0.2565); target < 0.1/h. Note: proving < 0.1/h with confidence needs > 30 clean hours."
+  },
+  {
+   "id": "AERIS-REQ-SYS-001",
+   "pass": true,
+   "evidence": "95 deadline misses in 5066289 steps (worst p99 0.8542 ms, worst 1124.1384 ms; budget 20 ms)"
+  }
+ ]
+}

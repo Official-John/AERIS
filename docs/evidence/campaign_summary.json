@@ -1,0 +1,1225 @@
+{
+ "meta": {
+  "flights": 1620,
+  "scenarios": 540,
+  "configs": [
+   "A",
+   "B",
+   "C"
+  ],
+  "wall_s": 376.10577630996704,
+  "workers": 11,
+  "code_version": "fc3e383-dirty",
+  "config_hash": "d321873563"
+ },
+ "summary": {
+  "split": "evaluation",
+  "runs": 1134,
+  "configs": [
+   "A",
+   "B",
+   "C"
+  ],
+  "fault_types": [
+   "baro_stuck",
+   "battery_fault",
+   "gps_drift",
+   "gps_off",
+   "gps_stuck",
+   "imu_bias",
+   "mag_offset",
+   "motor_degradation",
+   "none"
+  ],
+  "detection": {
+   "baro_stuck": {
+    "n": 42,
+    "detection_rate": [
+     1.0,
+     0.9162,
+     1.0
+    ],
+    "latency_median": [
+     0.6,
+     0.59,
+     0.615
+    ],
+    "latency_p95": 0.67,
+    "isolation_accuracy": [
+     1.0,
+     0.9162,
+     1.0
+    ],
+    "missed": 0
+   },
+   "battery_fault": {
+    "n": 42,
+    "detection_rate": [
+     1.0,
+     0.9162,
+     1.0
+    ],
+    "latency_median": [
+     0.825,
+     0.755,
+     0.98
+    ],
+    "latency_p95": 1.249,
+    "isolation_accuracy": [
+     1.0,
+     0.9162,
+     1.0
+    ],
+    "missed": 0
+   },
+   "gps_drift": {
+    "n": 42,
+    "detection_rate": [
+     0.7381,
+     0.5893,
+     0.847
+    ],
+    "latency_median": [
+     1.38,
+     1.23,
+     1.56
+    ],
+    "latency_p95": 2.03,
+    "isolation_accuracy": [
+     0.7143,
+     0.5643,
+     0.8283
+    ],
+    "missed": 11
+   },
+   "gps_off": {
+    "n": 42,
+    "detection_rate": [
+     1.0,
+     0.9162,
+     1.0
+    ],
+    "latency_median": [
+     0.29,
+     0.28,
+     0.305
+    ],
+    "latency_p95": 0.35,
+    "isolation_accuracy": [
+     1.0,
+     0.9162,
+     1.0
+    ],
+    "missed": 0
+   },
+   "gps_stuck": {
+    "n": 42,
+    "detection_rate": [
+     1.0,
+     0.9162,
+     1.0
+    ],
+    "latency_median": [
+     0.59,
+     0.57,
+     0.6
+    ],
+    "latency_p95": 0.649,
+    "isolation_accuracy": [
+     1.0,
+     0.9162,
+     1.0
+    ],
+    "missed": 0
+   },
+   "imu_bias": {
+    "n": 42,
+    "detection_rate": [
+     0.9762,
+     0.8768,
+     0.9958
+    ],
+    "latency_median": [
+     2.46,
+     2.18,
+     2.82
+    ],
+    "latency_p95": 16.91,
+    "isolation_accuracy": [
+     0.9762,
+     0.8768,
+     0.9958
+    ],
+    "missed": 1
+   },
+   "mag_offset": {
+    "n": 42,
+    "detection_rate": [
+     1.0,
+     0.9162,
+     1.0
+    ],
+    "latency_median": [
+     0.1,
+     0.09,
+     0.11
+    ],
+    "latency_p95": 0.169,
+    "isolation_accuracy": [
+     1.0,
+     0.9162,
+     1.0
+    ],
+    "missed": 0
+   },
+   "motor_degradation": {
+    "n": 42,
+    "detection_rate": [
+     0.7619,
+     0.6147,
+     0.8652
+    ],
+    "latency_median": [
+     0.745,
+     0.59,
+     1.09
+    ],
+    "latency_p95": 2.596,
+    "isolation_accuracy": [
+     0.7619,
+     0.6147,
+     0.8652
+    ],
+    "missed": 10
+   }
+  },
+  "false_alarms": {
+   "count": 0,
+   "clean_flight_hours": 5.917,
+   "per_hour": [
+    0.0,
+    0.0,
+    0.6199
+   ]
+  },
+  "diagnosis_precision": [
+   0.9428,
+   0.9124,
+   0.9631
+  ],
+  "confusion": {
+   "expected": [
+    "BARO_FROZEN",
+    "BATTERY_DEGRADED",
+    "GPS_DRIFT",
+    "GPS_FROZEN",
+    "GPS_LOSS",
+    "IMU_BIAS",
+    "MAG_FAULT",
+    "MOTOR_DEGRADED"
+   ],
+   "predicted": [
+    "BARO_FROZEN",
+    "BATTERY_DEGRADED",
+    "GPS_DRIFT",
+    "GPS_FROZEN",
+    "GPS_LOSS",
+    "IMU_BIAS",
+    "MAG_FAULT",
+    "MOTOR_DEGRADED",
+    "UNKNOWN",
+    "none"
+   ],
+   "counts": {
+    "BARO_FROZEN": {
+     "BARO_FROZEN": 42,
+     "BATTERY_DEGRADED": 0,
+     "GPS_DRIFT": 0,
+     "GPS_FROZEN": 0,
+     "GPS_LOSS": 0,
+     "IMU_BIAS": 0,
+     "MAG_FAULT": 0,
+     "MOTOR_DEGRADED": 0,
+     "UNKNOWN": 0,
+     "none": 0
+    },
+    "BATTERY_DEGRADED": {
+     "BARO_FROZEN": 0,
+     "BATTERY_DEGRADED": 42,
+     "GPS_DRIFT": 0,
+     "GPS_FROZEN": 0,
+     "GPS_LOSS": 0,
+     "IMU_BIAS": 0,
+     "MAG_FAULT": 0,
+     "MOTOR_DEGRADED": 0,
+     "UNKNOWN": 0,
+     "none": 0
+    },
+    "GPS_DRIFT": {
+     "BARO_FROZEN": 0,
+     "BATTERY_DEGRADED": 0,
+     "GPS_DRIFT": 30,
+     "GPS_FROZEN": 0,
+     "GPS_LOSS": 0,
+     "IMU_BIAS": 0,
+     "MAG_FAULT": 0,
+     "MOTOR_DEGRADED": 0,
+     "UNKNOWN": 1,
+     "none": 11
+    },
+    "GPS_FROZEN": {
+     "BARO_FROZEN": 0,
+     "BATTERY_DEGRADED": 0,
+     "GPS_DRIFT": 0,
+     "GPS_FROZEN": 42,
+     "GPS_LOSS": 0,
+     "IMU_BIAS": 0,
+     "MAG_FAULT": 0,
+     "MOTOR_DEGRADED": 0,
+     "UNKNOWN": 0,
+     "none": 0
+    },
+    "GPS_LOSS": {
+     "BARO_FROZEN": 0,
+     "BATTERY_DEGRADED": 0,
+     "GPS_DRIFT": 0,
+     "GPS_FROZEN": 0,
+     "GPS_LOSS": 42,
+     "IMU_BIAS": 0,
+     "MAG_FAULT": 0,
+     "MOTOR_DEGRADED": 0,
+     "UNKNOWN": 0,
+     "none": 0
+    },
+    "IMU_BIAS": {
+     "BARO_FROZEN": 0,
+     "BATTERY_DEGRADED": 0,
+     "GPS_DRIFT": 0,
+     "GPS_FROZEN": 0,
+     "GPS_LOSS": 0,
+     "IMU_BIAS": 41,
+     "MAG_FAULT": 0,
+     "MOTOR_DEGRADED": 0,
+     "UNKNOWN": 0,
+     "none": 1
+    },
+    "MAG_FAULT": {
+     "BARO_FROZEN": 0,
+     "BATTERY_DEGRADED": 0,
+     "GPS_DRIFT": 0,
+     "GPS_FROZEN": 0,
+     "GPS_LOSS": 0,
+     "IMU_BIAS": 0,
+     "MAG_FAULT": 42,
+     "MOTOR_DEGRADED": 0,
+     "UNKNOWN": 0,
+     "none": 0
+    },
+    "MOTOR_DEGRADED": {
+     "BARO_FROZEN": 0,
+     "BATTERY_DEGRADED": 0,
+     "GPS_DRIFT": 0,
+     "GPS_FROZEN": 0,
+     "GPS_LOSS": 0,
+     "IMU_BIAS": 0,
+     "MAG_FAULT": 0,
+     "MOTOR_DEGRADED": 32,
+     "UNKNOWN": 0,
+     "none": 10
+    }
+   }
+  },
+  "calibration": [
+   {
+    "bin": "0.00-0.85",
+    "n": 261,
+    "mean_confidence": 0.798,
+    "accuracy": [
+     0.9962,
+     0.9786,
+     0.9993
+    ]
+   },
+   {
+    "bin": "0.85-0.95",
+    "n": 51,
+    "mean_confidence": 0.9,
+    "accuracy": [
+     1.0,
+     0.93,
+     1.0
+    ]
+   },
+   {
+    "bin": "0.95-1.00",
+    "n": 2,
+    "mean_confidence": 1.0,
+    "accuracy": [
+     1.0,
+     0.3424,
+     1.0
+    ]
+   }
+  ],
+  "detection_vs_severity": {
+   "baro_stuck": [
+    {
+     "severity": "0.00-0.25",
+     "n": 0,
+     "detection_rate": [
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "severity": "0.25-0.50",
+     "n": 0,
+     "detection_rate": [
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "severity": "0.50-0.75",
+     "n": 0,
+     "detection_rate": [
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "severity": "0.75-1.00",
+     "n": 42,
+     "detection_rate": [
+      1.0,
+      0.9162,
+      1.0
+     ]
+    }
+   ],
+   "battery_fault": [
+    {
+     "severity": "0.00-0.25",
+     "n": 8,
+     "detection_rate": [
+      1.0,
+      0.6756,
+      1.0
+     ]
+    },
+    {
+     "severity": "0.25-0.50",
+     "n": 11,
+     "detection_rate": [
+      1.0,
+      0.7412,
+      1.0
+     ]
+    },
+    {
+     "severity": "0.50-0.75",
+     "n": 11,
+     "detection_rate": [
+      1.0,
+      0.7412,
+      1.0
+     ]
+    },
+    {
+     "severity": "0.75-1.00",
+     "n": 12,
+     "detection_rate": [
+      1.0,
+      0.7575,
+      1.0
+     ]
+    }
+   ],
+   "gps_drift": [
+    {
+     "severity": "0.00-0.25",
+     "n": 3,
+     "detection_rate": [
+      0.3333,
+      0.0615,
+      0.7923
+     ]
+    },
+    {
+     "severity": "0.25-0.50",
+     "n": 16,
+     "detection_rate": [
+      0.8125,
+      0.5699,
+      0.9341
+     ]
+    },
+    {
+     "severity": "0.50-0.75",
+     "n": 17,
+     "detection_rate": [
+      0.7059,
+      0.4687,
+      0.8672
+     ]
+    },
+    {
+     "severity": "0.75-1.00",
+     "n": 6,
+     "detection_rate": [
+      0.8333,
+      0.4365,
+      0.9699
+     ]
+    }
+   ],
+   "gps_off": [
+    {
+     "severity": "0.00-0.25",
+     "n": 0,
+     "detection_rate": [
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "severity": "0.25-0.50",
+     "n": 0,
+     "detection_rate": [
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "severity": "0.50-0.75",
+     "n": 0,
+     "detection_rate": [
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "severity": "0.75-1.00",
+     "n": 42,
+     "detection_rate": [
+      1.0,
+      0.9162,
+      1.0
+     ]
+    }
+   ],
+   "gps_stuck": [
+    {
+     "severity": "0.00-0.25",
+     "n": 0,
+     "detection_rate": [
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "severity": "0.25-0.50",
+     "n": 0,
+     "detection_rate": [
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "severity": "0.50-0.75",
+     "n": 0,
+     "detection_rate": [
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "severity": "0.75-1.00",
+     "n": 42,
+     "detection_rate": [
+      1.0,
+      0.9162,
+      1.0
+     ]
+    }
+   ],
+   "imu_bias": [
+    {
+     "severity": "0.00-0.25",
+     "n": 12,
+     "detection_rate": [
+      0.9167,
+      0.6461,
+      0.9851
+     ]
+    },
+    {
+     "severity": "0.25-0.50",
+     "n": 10,
+     "detection_rate": [
+      1.0,
+      0.7225,
+      1.0
+     ]
+    },
+    {
+     "severity": "0.50-0.75",
+     "n": 9,
+     "detection_rate": [
+      1.0,
+      0.7009,
+      1.0
+     ]
+    },
+    {
+     "severity": "0.75-1.00",
+     "n": 11,
+     "detection_rate": [
+      1.0,
+      0.7412,
+      1.0
+     ]
+    }
+   ],
+   "mag_offset": [
+    {
+     "severity": "0.00-0.25",
+     "n": 10,
+     "detection_rate": [
+      1.0,
+      0.7225,
+      1.0
+     ]
+    },
+    {
+     "severity": "0.25-0.50",
+     "n": 9,
+     "detection_rate": [
+      1.0,
+      0.7009,
+      1.0
+     ]
+    },
+    {
+     "severity": "0.50-0.75",
+     "n": 12,
+     "detection_rate": [
+      1.0,
+      0.7575,
+      1.0
+     ]
+    },
+    {
+     "severity": "0.75-1.00",
+     "n": 11,
+     "detection_rate": [
+      1.0,
+      0.7412,
+      1.0
+     ]
+    }
+   ],
+   "motor_degradation": [
+    {
+     "severity": "0.00-0.25",
+     "n": 10,
+     "detection_rate": [
+      0.0,
+      0.0,
+      0.2775
+     ]
+    },
+    {
+     "severity": "0.25-0.50",
+     "n": 12,
+     "detection_rate": [
+      1.0,
+      0.7575,
+      1.0
+     ]
+    },
+    {
+     "severity": "0.50-0.75",
+     "n": 11,
+     "detection_rate": [
+      1.0,
+      0.7412,
+      1.0
+     ]
+    },
+    {
+     "severity": "0.75-1.00",
+     "n": 9,
+     "detection_rate": [
+      1.0,
+      0.7009,
+      1.0
+     ]
+    }
+   ]
+  },
+  "outcomes": {
+   "baro_stuck": {
+    "A": {
+     "n": 42,
+     "mission_success": [
+      0.0238,
+      0.0042,
+      0.1232
+     ],
+     "recovered": [
+      0.2143,
+      0.1171,
+      0.3594
+     ],
+     "crashed": [
+      0.2143,
+      0.1171,
+      0.3594
+     ],
+     "geofence_breach": [
+      0.0238,
+      0.0042,
+      0.1232
+     ],
+     "landing_distance_median": [
+      50.68,
+      45.77,
+      68.81
+     ]
+    },
+    "C": {
+     "n": 42,
+     "mission_success": [
+      1.0,
+      0.9162,
+      1.0
+     ],
+     "recovered": [
+      1.0,
+      0.9162,
+      1.0
+     ],
+     "crashed": [
+      0.0,
+      0.0,
+      0.0838
+     ],
+     "geofence_breach": [
+      0.0,
+      0.0,
+      0.0838
+     ],
+     "landing_distance_median": [
+      1.95,
+      1.78,
+      2.065
+     ]
+    }
+   },
+   "battery_fault": {
+    "A": {
+     "n": 42,
+     "mission_success": [
+      0.6905,
+      0.5397,
+      0.8093
+     ],
+     "recovered": [
+      1.0,
+      0.9162,
+      1.0
+     ],
+     "crashed": [
+      0.0,
+      0.0,
+      0.0838
+     ],
+     "geofence_breach": [
+      0.0,
+      0.0,
+      0.0838
+     ],
+     "landing_distance_median": [
+      2.26,
+      2.07,
+      2.515
+     ]
+    },
+    "C": {
+     "n": 42,
+     "mission_success": [
+      0.4762,
+      0.3336,
+      0.6228
+     ],
+     "recovered": [
+      1.0,
+      0.9162,
+      1.0
+     ],
+     "crashed": [
+      0.0,
+      0.0,
+      0.0838
+     ],
+     "geofence_breach": [
+      0.0,
+      0.0,
+      0.0838
+     ],
+     "landing_distance_median": [
+      5.3,
+      2.275,
+      83.385
+     ]
+    }
+   },
+   "gps_drift": {
+    "A": {
+     "n": 42,
+     "mission_success": [
+      0.0,
+      0.0,
+      0.0838
+     ],
+     "recovered": [
+      0.9762,
+      0.8768,
+      0.9958
+     ],
+     "crashed": [
+      0.0,
+      0.0,
+      0.0838
+     ],
+     "geofence_breach": [
+      0.0238,
+      0.0042,
+      0.1232
+     ],
+     "landing_distance_median": [
+      29.24,
+      27.835,
+      32.573
+     ]
+    },
+    "C": {
+     "n": 42,
+     "mission_success": [
+      0.6905,
+      0.5397,
+      0.8093
+     ],
+     "recovered": [
+      1.0,
+      0.9162,
+      1.0
+     ],
+     "crashed": [
+      0.0,
+      0.0,
+      0.0838
+     ],
+     "geofence_breach": [
+      0.0,
+      0.0,
+      0.0838
+     ],
+     "landing_distance_median": [
+      2.46,
+      2.085,
+      3.69
+     ]
+    }
+   },
+   "gps_off": {
+    "A": {
+     "n": 42,
+     "mission_success": [
+      0.7619,
+      0.6147,
+      0.8652
+     ],
+     "recovered": [
+      0.7619,
+      0.6147,
+      0.8652
+     ],
+     "crashed": [
+      0.0476,
+      0.0132,
+      0.1579
+     ],
+     "geofence_breach": [
+      0.1429,
+      0.0672,
+      0.2784
+     ],
+     "landing_distance_median": [
+      2.795,
+      1.97,
+      3.235
+     ]
+    },
+    "C": {
+     "n": 42,
+     "mission_success": [
+      0.7619,
+      0.6147,
+      0.8652
+     ],
+     "recovered": [
+      0.7857,
+      0.6406,
+      0.8829
+     ],
+     "crashed": [
+      0.0476,
+      0.0132,
+      0.1579
+     ],
+     "geofence_breach": [
+      0.1429,
+      0.0672,
+      0.2784
+     ],
+     "landing_distance_median": [
+      2.895,
+      2.289,
+      3.64
+     ]
+    }
+   },
+   "gps_stuck": {
+    "A": {
+     "n": 42,
+     "mission_success": [
+      0.7857,
+      0.6406,
+      0.8829
+     ],
+     "recovered": [
+      0.7857,
+      0.6406,
+      0.8829
+     ],
+     "crashed": [
+      0.1905,
+      0.0998,
+      0.333
+     ],
+     "geofence_breach": [
+      0.0714,
+      0.0246,
+      0.1901
+     ],
+     "landing_distance_median": [
+      2.485,
+      2.195,
+      2.8
+     ]
+    },
+    "C": {
+     "n": 42,
+     "mission_success": [
+      0.7857,
+      0.6406,
+      0.8829
+     ],
+     "recovered": [
+      0.8333,
+      0.694,
+      0.9168
+     ],
+     "crashed": [
+      0.0952,
+      0.0377,
+      0.2207
+     ],
+     "geofence_breach": [
+      0.119,
+      0.0519,
+      0.25
+     ],
+     "landing_distance_median": [
+      2.545,
+      2.009,
+      3.4
+     ]
+    }
+   },
+   "imu_bias": {
+    "A": {
+     "n": 42,
+     "mission_success": [
+      0.9762,
+      0.8768,
+      0.9958
+     ],
+     "recovered": [
+      0.9762,
+      0.8768,
+      0.9958
+     ],
+     "crashed": [
+      0.0238,
+      0.0042,
+      0.1232
+     ],
+     "geofence_breach": [
+      0.0238,
+      0.0042,
+      0.1232
+     ],
+     "landing_distance_median": [
+      2.03,
+      1.86,
+      2.34
+     ]
+    },
+    "C": {
+     "n": 42,
+     "mission_success": [
+      1.0,
+      0.9162,
+      1.0
+     ],
+     "recovered": [
+      1.0,
+      0.9162,
+      1.0
+     ],
+     "crashed": [
+      0.0,
+      0.0,
+      0.0838
+     ],
+     "geofence_breach": [
+      0.0,
+      0.0,
+      0.0838
+     ],
+     "landing_distance_median": [
+      2.015,
+      1.92,
+      2.11
+     ]
+    }
+   },
+   "mag_offset": {
+    "A": {
+     "n": 42,
+     "mission_success": [
+      0.2619,
+      0.153,
+      0.4107
+     ],
+     "recovered": [
+      0.3333,
+      0.2101,
+      0.4845
+     ],
+     "crashed": [
+      0.0714,
+      0.0246,
+      0.1901
+     ],
+     "geofence_breach": [
+      0.2857,
+      0.1717,
+      0.4357
+     ],
+     "landing_distance_median": [
+      93.725,
+      44.014,
+      131.665
+     ]
+    },
+    "C": {
+     "n": 42,
+     "mission_success": [
+      0.2619,
+      0.153,
+      0.4107
+     ],
+     "recovered": [
+      0.9286,
+      0.8099,
+      0.9754
+     ],
+     "crashed": [
+      0.0,
+      0.0,
+      0.0838
+     ],
+     "geofence_breach": [
+      0.0,
+      0.0,
+      0.0838
+     ],
+     "landing_distance_median": [
+      1.985,
+      1.87,
+      2.08
+     ]
+    }
+   },
+   "motor_degradation": {
+    "A": {
+     "n": 42,
+     "mission_success": [
+      1.0,
+      0.9162,
+      1.0
+     ],
+     "recovered": [
+      1.0,
+      0.9162,
+      1.0
+     ],
+     "crashed": [
+      0.0,
+      0.0,
+      0.0838
+     ],
+     "geofence_breach": [
+      0.0,
+      0.0,
+      0.0838
+     ],
+     "landing_distance_median": [
+      1.985,
+      1.89,
+      2.035
+     ]
+    },
+    "C": {
+     "n": 42,
+     "mission_success": [
+      0.6905,
+      0.5397,
+      0.8093
+     ],
+     "recovered": [
+      1.0,
+      0.9162,
+      1.0
+     ],
+     "crashed": [
+      0.0,
+      0.0,
+      0.0838
+     ],
+     "geofence_breach": [
+      0.0,
+      0.0,
+      0.0838
+     ],
+     "landing_distance_median": [
+      1.925,
+      1.83,
+      1.98
+     ]
+    }
+   },
+   "none": {
+    "A": {
+     "n": 42,
+     "mission_success": [
+      1.0,
+      0.9162,
+      1.0
+     ],
+     "recovered": [
+      1.0,
+      0.9162,
+      1.0
+     ],
+     "crashed": [
+      0.0,
+      0.0,
+      0.0838
+     ],
+     "geofence_breach": [
+      0.0,
+      0.0,
+      0.0838
+     ],
+     "landing_distance_median": [
+      1.98,
+      1.905,
+      2.12
+     ]
+    },
+    "C": {
+     "n": 42,
+     "mission_success": [
+      1.0,
+      0.9162,
+      1.0
+     ],
+     "recovered": [
+      1.0,
+      0.9162,
+      1.0
+     ],
+     "crashed": [
+      0.0,
+      0.0,
+      0.0838
+     ],
+     "geofence_breach": [
+      0.0,
+      0.0,
+      0.0838
+     ],
+     "landing_distance_median": [
+      1.98,
+      1.905,
+      2.12
+     ]
+    }
+   }
+  },
+  "timing": {
+   "runs": 756,
+   "aeris_steps": 4400313,
+   "deadline_misses": 51,
+   "worst_p99_ms": 0.5973,
+   "worst_max_ms": 43.1831,
+   "mean_ms": 0.1216
+  }
+ },
+ "checks": [
+  {
+   "id": "AERIS-REQ-FDIR-001",
+   "pass": true,
+   "evidence": "GPS stale declared in 42/42 GPS-outage runs; worst latency 0.36 s (limit 0.5 s)"
+  },
+  {
+   "id": "AERIS-REQ-FDIR-003",
+   "pass": true,
+   "evidence": "drift >= 0.5 m/s detected within 20 s in 11/11 runs (1.0 , 95% CI 0.7412-1.0); target >= 0.95"
+  },
+  {
+   "id": "AERIS-REQ-FDIR-004",
+   "pass": true,
+   "evidence": "0 false alarms in 5.917 fault-free flight hours = 0.0/h (95% CI 0.0-0.6199); target < 0.1/h. Note: proving < 0.1/h with confidence needs > 30 clean hours."
+  },
+  {
+   "id": "AERIS-REQ-SYS-001",
+   "pass": true,
+   "evidence": "51 deadline misses in 4400313 steps (worst p99 0.5973 ms, worst 43.1831 ms; budget 20 ms)"
+  }
+ ]
+}

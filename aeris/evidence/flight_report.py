@@ -153,7 +153,7 @@ if (D.truth.length) {
   const f = D.truth[0], r0 = D.runs[0], i = Math.min(r0.rows.length-1, Math.round(f.start/0.2));
   faultMark = el("g",{opacity:0},map);
   el("circle",{cx:X(r0.rows[i][1]),cy:Y(r0.rows[i][2]),r:11,fill:"none",stroke:"var(--critical)","stroke-width":2.5},faultMark);
-  const t = el("text",{x:X(r0.rows[i][1])+14,y:Y(r0.rows[i][2])+4,fill:"var(--critical)","font-size":12,"font-weight":600},faultMark);
+  const t = el("text",{x:X(r0.rows[i][1])+14,y:Y(r0.rows[i][2])-10,fill:"var(--critical)","font-size":12,"font-weight":600,stroke:"var(--surface)","stroke-width":4,"paint-order":"stroke","stroke-linejoin":"round"},faultMark);
   t.textContent = "⚠ fault injected";
 }
 document.getElementById("legend").innerHTML = D.runs.map(r => `<span><span class="sw" style="background:var(${r.color})"></span>${r.label}</span>`).join("")
@@ -226,5 +226,6 @@ function frame(ts) { if (!playing) return; if (prev !== null) { t += (ts-prev)/1
 document.getElementById("play").onclick = () => { playing = !playing; prev = null; if (playing && t >= tEnd) t = 0;
   document.getElementById("play").textContent = playing ? "❚❚ Pause" : "▶ Play"; if (playing) requestAnimationFrame(frame); };
 slider.oninput = () => { t = +slider.value; update(t); };
-t = 0; slider.value = 0; update(0);
+const startAt = (location.hash.match(/t=([\d.]+)/) || [])[1];   // e.g. replay.html#t=60
+t = startAt ? Math.min(+startAt, tEnd) : 0; slider.value = t; update(t);
 </script></body></html>"""
