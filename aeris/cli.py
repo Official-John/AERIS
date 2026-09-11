@@ -94,6 +94,24 @@ def cmd_check(a):
     sys.exit(1 if any(c["pass"] is False for c in data["checks"]) else 0)
 
 
+def cmd_report(a):
+    """Rebuild report.html from a finished campaign's summary.json (no flights)."""
+    from .evidence.campaign_report import build
+    out = Path(a.campaign_dir)
+    data = json.loads((out / "summary.json").read_text(encoding="utf-8"))
+    (out / "report.html").write_text(build(data["summary"], data["checks"], data["meta"]), encoding="utf-8")
+    print(f"Rebuilt {out / 'report.html'}")
+
+
+def cmd_replay(a):
+    """Rebuild replay.html from saved result_*.json files (no flights)."""
+    from .evidence.flight_report import build
+    folder = Path(a.folder)
+    results = [json.loads(p.read_text(encoding="utf-8")) for p in sorted(folder.glob("result_*.json"))]
+    (folder / "replay.html").write_text(build(results), encoding="utf-8")
+    print(f"Rebuilt {folder / 'replay.html'}")
+
+
 def cmd_trace(a):
     from .trace import build_trace
     ok, md = build_trace(ROOT)
@@ -136,6 +154,14 @@ def main(argv=None):
     k = sub.add_parser("check", help="print requirement checks of a finished campaign")
     k.add_argument("campaign_dir")
     k.set_defaults(func=cmd_check)
+
+    r = sub.add_parser("report", help="rebuild a campaign report.html from its summary.json")
+    r.add_argument("campaign_dir")
+    r.set_defaults(func=cmd_report)
+
+    rp = sub.add_parser("replay", help="rebuild replay.html from saved result_*.json files")
+    rp.add_argument("folder")
+    rp.set_defaults(func=cmd_replay)
 
     t = sub.add_parser("trace", help="write docs/trace_matrix.md")
     t.add_argument("--check", action="store_true", help="exit 1 if a requirement has no verifying test")
