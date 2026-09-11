@@ -1,0 +1,38 @@
+{
+  "note": "Numbers are starting targets. Change them with a recorded reason (docs/adr), never silently.",
+  "hazards": [
+    {"id": "HAZ-01", "hazard": "Undetected loss or corruption of position data", "effect": "Fly-away or landing far from home"},
+    {"id": "HAZ-02", "hazard": "False fault declaration", "effect": "Needless landing or mission abort"},
+    {"id": "HAZ-03", "hazard": "Recovery action needs a capability that has failed", "effect": "Loss of control during recovery"},
+    {"id": "HAZ-04", "hazard": "Not enough energy for the chosen recovery", "effect": "Forced landing away from home"},
+    {"id": "HAZ-05", "hazard": "Health stack stops or overruns without anyone noticing", "effect": "Faults go unmonitored"},
+    {"id": "HAZ-06", "hazard": "Evidence missing after an event", "effect": "Failure can't be reproduced or explained"},
+    {"id": "HAZ-07", "hazard": "Health monitor reads the fault ground truth", "effect": "Results look perfect but prove nothing"}
+  ],
+  "requirements": [
+    {"id": "AERIS-REQ-FDIR-001", "hazards": ["HAZ-01"], "verification": "Test (unit, scenario), campaign",
+     "text": "The system shall declare GPS stale within 0.5 s after GPS updates stop, with the stale timeout set to 0.3 s."},
+    {"id": "AERIS-REQ-FDIR-002", "hazards": ["HAZ-01", "HAZ-02"], "verification": "Test (unit)",
+     "text": "The system shall not mark GPS FAILED for drift on a single residual; the velocity-consistency and position residuals shall both agree. Timeouts and frozen output are exempt."},
+    {"id": "AERIS-REQ-FDIR-003", "hazards": ["HAZ-01"], "verification": "Campaign",
+     "text": "With vision odometry fitted, the system shall detect a GPS drift of 0.5 m/s or more within 20 s with probability of at least 0.95 (evaluation set, configuration B)."},
+    {"id": "AERIS-REQ-FDIR-004", "hazards": ["HAZ-02"], "verification": "Test (scenario), campaign",
+     "text": "The false alarm rate in fault-free flight shall be below 0.1 per flight hour (evaluation set)."},
+    {"id": "AERIS-REQ-REC-001", "hazards": ["HAZ-01"], "verification": "Test (scenario)",
+     "text": "Following a confirmed critical navigation fault, the system shall isolate the sensor and request a defined degraded or contingency mode within 1.0 s."},
+    {"id": "AERIS-REQ-REC-002", "hazards": ["HAZ-03"], "verification": "Test (exhaustive unit test)",
+     "text": "The recovery manager shall select only actions whose required capabilities are available in the current health state."},
+    {"id": "AERIS-REQ-REC-003", "hazards": ["HAZ-04"], "verification": "Test (unit, scenario)",
+     "text": "Return shall be selected only when the twin-predicted energy at landing exceeds the reserve (15 %) and the predicted loaded voltage stays above 3.40 V per cell (just above the autopilot's 3.35 V forced-landing threshold)."},
+    {"id": "AERIS-REQ-SYS-001", "hazards": ["HAZ-05"], "verification": "Test (timing), campaign",
+     "text": "The AERIS step shall run at 50 Hz with fewer than 0.1 % of steps exceeding the 20 ms period on the reference host."},
+    {"id": "AERIS-REQ-SYS-002", "hazards": ["HAZ-05"], "verification": "Test (kill-node scenario)",
+     "text": "If AERIS stops responding for 1 s, the vehicle shall continue under the autopilot's own failsafes."},
+    {"id": "AERIS-REQ-LOG-001", "hazards": ["HAZ-06"], "verification": "Test",
+     "text": "The system shall record a timestamped event for each detection, diagnosis (with its evidence) and recovery action."},
+    {"id": "AERIS-REQ-LOG-002", "hazards": ["HAZ-06"], "verification": "Test",
+     "text": "Each run shall store a manifest sufficient to regenerate it (code version, config hash, scenario, seed)."},
+    {"id": "AERIS-REQ-ARCH-001", "hazards": ["HAZ-07"], "verification": "Test (static import check)",
+     "text": "The AERIS core shall not import the simulator or the fault injector, and shall not receive fault ground truth."}
+  ]
+}

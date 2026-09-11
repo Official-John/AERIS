@@ -1,0 +1,46 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install
+        run: pip install -r requirements.txt
+
+      - name: Unit, scenario and architecture tests
+        run: python -m unittest discover -s tests -t . -v
+
+      - name: Every requirement has a verifying test
+        run: python -m aeris trace --check
+
+      - name: Trace matrix is up to date
+        run: git diff --exit-code docs/trace_matrix.md
+
+      - name: Smoke campaign (27 scenarios x 3 configurations)
+        run: python -m aeris campaign --quick --workers 2 --out results/ci
+
+      - name: Campaign requirement checks
+        run: python -m aeris check results/ci
+
+      - name: Flagship demo replay
+        run: python -m aeris demo --no-open --out results/ci-demo
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: aeris-reports
+          path: |
+            results/ci/report.html
+            results/ci/summary.json
+            results/ci-demo/**/replay.html

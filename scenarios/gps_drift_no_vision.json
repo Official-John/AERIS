@@ -1,0 +1,22 @@
+{
+  "scenario_id": "gps_drift_no_vision",
+  "description": "Same drift, but no vision odometry: AERIS has no independent reference.",
+  "seed": 7,
+  "vehicle": {
+    "has_vision": false
+  },
+  "wind": {
+    "mean_mps": 4.0,
+    "dir_deg": 200
+  },
+  "faults": [
+    {
+      "type": "gps_drift",
+      "start": 40.0,
+      "params": {
+        "rate_mps": 0.4,
+        "direction_deg": 90
+      }
+    }
+  ]
+}

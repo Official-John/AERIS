@@ -1,0 +1,19 @@
+{
+  "scenario_id": "baro_frozen",
+  "description": "Barometer freezes; the baseline later loses its height estimate while landing.",
+  "seed": 7,
+  "vehicle": {
+    "has_vision": true
+  },
+  "wind": {
+    "mean_mps": 4.0,
+    "dir_deg": 200
+  },
+  "faults": [
+    {
+      "type": "baro_stuck",
+      "start": 40.0,
+      "params": {}
+    }
+  ]
+}
