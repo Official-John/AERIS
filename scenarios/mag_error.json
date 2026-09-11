@@ -1,0 +1,21 @@
+{
+  "scenario_id": "mag_error",
+  "description": "Magnetometer heading jumps by 40 degrees (e.g. magnetic interference).",
+  "seed": 7,
+  "vehicle": {
+    "has_vision": true
+  },
+  "wind": {
+    "mean_mps": 4.0,
+    "dir_deg": 200
+  },
+  "faults": [
+    {
+      "type": "mag_offset",
+      "start": 40.0,
+      "params": {
+        "offset_deg": 40
+      }
+    }
+  ]
+}

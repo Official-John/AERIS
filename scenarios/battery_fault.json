@@ -1,0 +1,22 @@
+{
+  "scenario_id": "battery_fault",
+  "description": "Battery suddenly loses charge and its resistance rises.",
+  "seed": 7,
+  "vehicle": {
+    "has_vision": true
+  },
+  "wind": {
+    "mean_mps": 4.0,
+    "dir_deg": 200
+  },
+  "faults": [
+    {
+      "type": "battery_fault",
+      "start": 40.0,
+      "params": {
+        "charge_loss": 0.6,
+        "resistance_mult": 1.5
+      }
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "scenario_id": "flagship_gps_drift",
+  "description": "Flagship demo: GPS position slowly drifts (like spoofing) while vision odometry stays honest.",
+  "seed": 7,
+  "vehicle": {
+    "has_vision": true
+  },
+  "wind": {
+    "mean_mps": 4.0,
+    "dir_deg": 200
+  },
+  "faults": [
+    {
+      "type": "gps_drift",
+      "start": 40.0,
+      "params": {
+        "rate_mps": 0.4,
+        "direction_deg": 90
+      }
+    }
+  ]
+}

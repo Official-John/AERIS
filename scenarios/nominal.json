@@ -1,0 +1,13 @@
+{
+  "scenario_id": "nominal",
+  "description": "No fault. Shows a normal mission and that AERIS stays quiet.",
+  "seed": 7,
+  "vehicle": {
+    "has_vision": true
+  },
+  "wind": {
+    "mean_mps": 4.0,
+    "dir_deg": 200
+  },
+  "faults": []
+}

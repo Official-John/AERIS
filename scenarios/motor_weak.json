@@ -1,0 +1,22 @@
+{
+  "scenario_id": "motor_weak",
+  "description": "One motor at 80 % efficiency: enough margin to continue carefully.",
+  "seed": 7,
+  "vehicle": {
+    "has_vision": true
+  },
+  "wind": {
+    "mean_mps": 4.0,
+    "dir_deg": 200
+  },
+  "faults": [
+    {
+      "type": "motor_degradation",
+      "start": 40.0,
+      "params": {
+        "motor": 1,
+        "efficiency": 0.8
+      }
+    }
+  ]
+}

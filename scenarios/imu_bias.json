@@ -1,0 +1,22 @@
+{
+  "scenario_id": "imu_bias",
+  "description": "Accelerometer bias; AERIS estimates and compensates it.",
+  "seed": 7,
+  "vehicle": {
+    "has_vision": true
+  },
+  "wind": {
+    "mean_mps": 4.0,
+    "dir_deg": 200
+  },
+  "faults": [
+    {
+      "type": "imu_bias",
+      "start": 40.0,
+      "params": {
+        "bx": 0.6,
+        "by": 0.0
+      }
+    }
+  ]
+}
