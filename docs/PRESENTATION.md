@@ -85,6 +85,9 @@ test suite, which works as the specification for a C++ port.
 
 ## CV line
 
+Name it under your own line of work at johnayodele.dev and on
+linkedin.com/in/ayodelejohn05.
+
 > Self-Diagnosing Aircraft Digital Twin (AERIS) | Python, numpy, simulation, fault management
 > Built a fault detection, isolation and recovery supervisor for a simulated quadrotor:
 > residual-based detectors, a fault signature matrix, a digital twin with in-flight
@@ -107,4 +110,4 @@ test suite, which works as the specification for a C++ port.
 > than I expected with weak motors and damaged batteries, and the write-up says so.
 >
 > The code, the tests and the full evaluation history, including what didn't work,
-> are on my GitHub.
+> are on my GitHub. More of my work: johnayodele.dev

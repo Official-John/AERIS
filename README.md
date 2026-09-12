@@ -14,32 +14,32 @@ in a browser to replay it.*
 ## Results
 
 1,620 simulated flights on seeds never used for tuning: 42 evaluation scenarios per
-fault type, each flown by the baseline autopilot alone (**A**) and with AERIS in
-control (**C**). Detection figures come from runs where AERIS only watched (**B**).
+fault type, each flown by the baseline autopilot alone (A) and with AERIS in
+control (C). Detection figures come from runs where AERIS only watched (B).
 
 | Fault | Detected | Median time to flag | Mission success A → C | Safe landing A → C | Crashes A → C |
 |---|---|---|---|---|---|
-| Barometer frozen | 100 % | 0.60 s | 2 % → **100 %** | 21 % → **100 %** | 21 % → **0 %** |
-| GPS drift (spoofing-like) | 74 % | 1.4 s | 0 % → **69 %** | 98 % → 100 % | 0 % → 0 % |
-| Magnetometer error | 100 % | 0.10 s | 26 % → 26 % | 33 % → **93 %** | 7 % → **0 %** |
-| GPS frozen | 100 % | 0.59 s | 79 % → 79 % | 79 % → 83 % | 19 % → **10 %** |
+| Barometer frozen | 100 % | 0.60 s | 2 % → 100 % | 21 % → 100 % | 21 % → 0 % |
+| GPS drift (spoofing-like) | 74 % | 1.4 s | 0 % → 69 % | 98 % → 100 % | 0 % → 0 % |
+| Magnetometer error | 100 % | 0.10 s | 26 % → 26 % | 33 % → 93 % | 7 % → 0 % |
+| GPS frozen | 100 % | 0.59 s | 79 % → 79 % | 79 % → 83 % | 19 % → 10 % |
 | GPS loss | 100 % | 0.29 s | 76 % → 76 % | 76 % → 79 % | 5 % → 5 % |
 | IMU bias | 98 % | 2.5 s | 98 % → 100 % | 98 % → 100 % | 2 % → 0 % |
-| Motor degradation | 76 % | 0.74 s | 100 % → *69 %* | 100 % → 100 % | 0 % → 0 % |
-| Battery fault | 100 % | 0.82 s | 69 % → *48 %* | 100 % → 100 % | 0 % → 0 % |
+| Motor degradation | 76 % | 0.74 s | 100 % → 69 % | 100 % → 100 % | 0 % → 0 % |
+| Battery fault | 100 % | 0.82 s | 69 % → 48 % | 100 % → 100 % | 0 % → 0 % |
 | No fault | | | 100 % → 100 % | 100 % → 100 % | 0 % → 0 % |
 
-Across all 336 faulted evaluation flights: **crashes 23 → 6**, safe landings
+Across all 336 faulted evaluation flights: crashes 23 to 6, safe landings
 76 % → 94 %, mission success 56 % → 71 %.
 
-- **False alarms**: 0 in the campaign's 5.9 fault-free hours; 2 in a separate 40-hour
+- False alarms: 0 in the campaign's 5.9 fault-free hours; 2 in a separate 40-hour
   fault-free soak (0.05 per hour, 95 % interval 0.006–0.18).
-- **Diagnosis precision**: 94 % of diagnoses named the right fault.
-- **Cost**: AERIS takes 0.12 ms per step on average, against a 20 ms budget.
-- **Where AERIS does worse** (in italics above): it is deliberately more cautious with
+- Diagnosis precision: 94 % of diagnoses named the right fault.
+- Cost: AERIS takes 0.12 ms per step on average, against a 20 ms budget.
+- Where AERIS does worse (the motor and battery rows): it is deliberately more cautious with
   weak motors and damaged batteries, and returns home when the margin gets thin. It
   loses missions there, not aircraft.
-- **Where it can't help**: a quarter of the scenarios fly without vision odometry, so
+- Where it can't help: a quarter of the scenarios fly without vision odometry, so
   there is no independent position reference. All 11 undetected drifts were on those
   aircraft (with vision fitted, 31 of 31 were caught), and so were all 10 failed
   GPS-loss missions.
@@ -71,15 +71,15 @@ simulated aircraft ──sensor data──► autopilot (PX4-like stand-in) ─�
    └───────────────────────────────── AERIS: detect → diagnose → isolate → recover
 ```
 
-1. **Detect.** Small tests compare each sensor with something independent: GPS with
+1. Detect. Small tests compare each sensor with something independent: GPS with
    vision odometry, the magnetometer with the gyro, the IMU with measured velocity
    change, battery voltage with a battery model. CUSUM tests catch slow drifts.
-2. **Confirm.** A component goes NOMINAL → SUSPECT → DEGRADED/FAILED only when
+2. Confirm. A component goes NOMINAL → SUSPECT → DEGRADED/FAILED only when
    evidence persists (8 of the last 10 checks).
-3. **Diagnose.** A signature table names the fault from the pattern of checks that
+3. Diagnose. A signature table names the fault from the pattern of checks that
    tripped, and from the ones that didn't. Every diagnosis carries its evidence.
-4. **Isolate.** Stop fusing the bad sensor, cancel an estimated bias, or reduce speed.
-5. **Recover.** Pick the least severe action (continue, return, land, descend) whose
+4. Isolate. Stop fusing the bad sensor, cancel an estimated bias, or reduce speed.
+5. Recover. Pick the least severe action (continue, return, land, descend) whose
    required capabilities still work. The digital twin checks that the energy and
    battery voltage will last before choosing to return home.
 
@@ -87,6 +87,8 @@ The autopilot keeps its own failsafes and can always override AERIS
 ([ADR 0002](docs/adr/0002-simplex-authority.md)). Faults are injected before either
 of them sees the data, and AERIS can't read the ground truth
 ([ADR 0003](docs/adr/0003-fault-injection-and-oracle-separation.md)). A test enforces this.
+
+![AERIS architecture: the simulated aircraft and its fault injector, the stand-in autopilot, the AERIS health monitor, and the evidence layer](docs/design/AERIS_architecture.png)
 
 More detail: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
@@ -101,11 +103,11 @@ More detail: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ## Limitations
 
-- The baseline is a **simplified PX4-like stand-in**, not PX4. Results compare two
+- The baseline is a simplified PX4-like stand-in, not PX4. Results compare two
   pieces of software in the same simplified world.
-- **Point-mass simulator**: no roll or pitch, so the risk of flying with little thrust
+- Point-mass simulator: no roll or pitch, so the risk of flying with little thrust
   margin isn't modelled. Sensor noise is plausible, not calibrated against hardware.
-- **IMU false alarm**: strong gusts occasionally trigger a false IMU-bias diagnosis
+- IMU false alarm: strong gusts occasionally trigger a false IMU-bias diagnosis
   (both soak alarms). The fix is known; see `docs/TWO_DAY_PLAN.md`.
 - Battery charge estimated from voltage is imprecise between 20 % and 40 %, where a
   LiPo's voltage curve is flat. This is why AERIS is cautious with damaged batteries.
@@ -145,6 +147,11 @@ The full plan is in the v2 design document: [`docs/design/`](docs/design/).
 - [`docs/PRESENTATION.md`](docs/PRESENTATION.md): talking points, demo script, questions and answers
 - [`docs/TWO_DAY_PLAN.md`](docs/TWO_DAY_PLAN.md): how to learn and present the project in two days
 
+## Author
+
+John Obaloluwa Ayodele
+[johnayodele.dev](https://johnayodele.dev/) · [LinkedIn](https://www.linkedin.com/in/ayodelejohn05/)
+
 ## License
 
-BSD 3-Clause. See [LICENSE](LICENSE).
+BSD 3-Clause. See [LICENSE](LICENSE). Copyright (c) 2026 John Obaloluwa Ayodele.

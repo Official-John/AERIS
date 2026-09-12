@@ -69,15 +69,15 @@ identical to the commit (checked with `git diff`).
 
 Findings to report as they are:
 
-- **False alarms**: 2 in 40.2 soak hours, both IMU-bias diagnoses in 6–7 m/s wind:
+- False alarms: 2 in 40.2 soak hours, both IMU-bias diagnoses in 6–7 m/s wind:
   0.05 per hour (95 % interval 0.006–0.18). The measured rate meets the 0.1/h target,
   but proving it at 95 % confidence needs more flight hours or the IMU fix.
-- **Battery faults**: mission success 48 % against the baseline's 69 %, with equal safe
+- Battery faults: mission success 48 % against the baseline's 69 %, with equal safe
   landings (100 %). AERIS returns home early when its charge estimate is marginal.
   Charge estimated from voltage is imprecise in the flat middle of the LiPo curve
   (3.70–3.78 V per cell between 20 % and 40 %).
-- **Motor degradation**: 69 % against 100 %, equal safety. AERIS turns back below a 1.4
+- Motor degradation: 69 % against 100 %, equal safety. AERIS turns back below a 1.4
   thrust-to-weight margin. The point-mass simulator doesn't model the attitude-control
   risk of flying with little margin, so the baseline is never punished for it.
-- **Timing**: one 1.1 s step in 5 million, during the soak, with 11 worker processes on a
+- Timing: one 1.1 s step in 5 million, during the soak, with 11 worker processes on a
   Windows laptop. This is operating-system scheduling. The project makes no real-time claims.

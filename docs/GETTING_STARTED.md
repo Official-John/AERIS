@@ -126,14 +126,14 @@ python -m aeris campaign --per-fault 60 --seed 7000     # 1,620 flights, about 6
 
 Open `results/campaign/report.html`. How to read it:
 
-- **Requirement checks**: PASS or FAIL against the numbers in `docs/requirements.json`.
-- **Mission outcome**: blue bars (AERIS) against orange bars (baseline), for each fault.
+- Requirement checks: PASS or FAIL against the numbers in `docs/requirements.json`.
+- Mission outcome: blue bars (AERIS) against orange bars (baseline), for each fault.
   The thin black line on each bar is the 95 % confidence interval, the range the real
   value probably lies in.
-- **Time to detect**: how quickly each fault is noticed (log scale).
-- **Confusion matrix**: which fault was injected (row) and what AERIS concluded
+- Time to detect: how quickly each fault is noticed (log scale).
+- Confusion matrix: which fault was injected (row) and what AERIS concluded
   (column). A perfect result is a diagonal.
-- **Detection against severity**: small faults are harder to see.
+- Detection against severity: small faults are harder to see.
 
 A fault-free "soak" test, for false alarms only:
 
@@ -156,11 +156,11 @@ python -m aeris campaign --families none --per-fault 1200 --configs B --seed 950
 
 ## 9. Troubleshooting
 
-- **`python` is not recognized**: use `py -m aeris demo`, or reinstall Python with
+- `python` is not recognized: use `py -m aeris demo`, or reinstall Python with
   "Add to PATH" ticked.
-- **The browser didn't open**: open the `replay.html` path printed at the end by hand.
-- **A campaign seems stuck**: always run it as `python -m aeris campaign ...` from the
+- The browser didn't open: open the `replay.html` path printed at the end by hand.
+- A campaign seems stuck: always run it as `python -m aeris campaign ...` from the
   project folder. On Windows, parallel workers can't start from a script piped into
   Python.
-- **Different numbers from mine**: check the seed and `--per-fault`. Same seed and same
+- Different numbers from mine: check the seed and `--per-fault`. Same seed and same
   code give the same result.
