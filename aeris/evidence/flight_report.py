@@ -7,7 +7,7 @@ health lights, an altitude chart and a timeline that explains every decision.
 import json
 from html import escape
 
-from .svg import report_css
+from .svg import FONT_LINKS, report_css
 
 LABELS = {"A": "Baseline autopilot (A)", "B": "AERIS advisory (B)", "C": "AERIS active (C)"}
 COLORS = {"A": "--series-a", "B": "--series-b", "C": "--series-c"}
@@ -62,28 +62,29 @@ def build(results):
     lede = (f"{escape(describe_fault(results[0]['truth']))} Wind {wind.get('mean_mps', 0)} m/s. "
             f"Vision odometry {'fitted' if sc.get('vehicle', {}).get('has_vision', True) else 'not fitted'}. "
             f"Seed {sc['seed']}. The fault is hidden from AERIS; it only sees sensor data.")
-    return (_TEMPLATE.replace("__CSS__", report_css()).replace("__TITLE__", escape(sc["scenario_id"]))
+    return (_TEMPLATE.replace("__CSS__", report_css()).replace("__FONTS__", FONT_LINKS).replace("__TITLE__", escape(sc["scenario_id"]))
             .replace("__LEDE__", lede).replace("__TILES__", tiles)
             .replace("__DATA__", json.dumps(data).replace("</", "<\\/")))
 
 
 _TEMPLATE = r"""<!doctype html><html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1"><title>AERIS replay: __TITLE__</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>AERIS replay: __TITLE__</title>__FONTS__
 <style>__CSS__
 .layout { display:grid; grid-template-columns: minmax(0, 1.6fr) minmax(260px, 1fr); gap:16px; margin-top:16px; }
 @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } }
 .controls { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin: 14px 0 0; }
 button, select { font:inherit; padding:6px 14px; border-radius:8px; border:1px solid var(--border);
   background:var(--surface); color:var(--ink); cursor:pointer; }
-button.primary { background:var(--series-c); color:#fff; border-color:transparent; min-width:84px; }
-input[type=range] { flex:1; min-width:200px; accent-color: var(--series-c); }
+button.primary { background:var(--accent); color:var(--page); font-weight:600;
+  border-color:transparent; min-width:84px; }
+input[type=range] { flex:1; min-width:200px; accent-color: var(--accent); }
 .clock { font-variant-numeric: tabular-nums; min-width: 70px; font-weight:600; }
 .chips { display:grid; grid-template-columns: 1fr 1fr; gap:6px; }
 .chip { display:flex; align-items:center; gap:8px; padding:6px 8px; border-radius:8px; border:1px solid var(--border); font-size:13px; }
 .dot { width:10px; height:10px; border-radius:50%; flex:none; }
 .chip .st { margin-left:auto; font-size:11px; color:var(--ink2); font-weight:600; }
 .modes div { display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid var(--grid); }
-#timeline tr.future td { opacity:.35; } #timeline tr.now td { background: color-mix(in srgb, var(--series-c) 12%, transparent); }
+#timeline tr.future td { opacity:.35; } #timeline tr.now td { background: color-mix(in srgb, var(--accent) 10%, transparent); }
 .src { font-size:11px; font-weight:600; white-space:nowrap; }
 details summary { cursor:pointer; color:var(--ink2); font-size:12px; }
 ul.ev { margin:4px 0 0 16px; padding:0; font-size:12px; color:var(--ink2); }

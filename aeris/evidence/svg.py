@@ -7,44 +7,64 @@ browsers show as a tooltip on hover.
 """
 from html import escape
 
-FONT = 'font-family="system-ui, -apple-system, Segoe UI, sans-serif"'
+FONT = 'font-family="Space Grotesk, Inter, system-ui, sans-serif"'
 
 
 def report_css():
+    """Dark theme matching johnayodele.dev (--void / --signal / --flight tokens).
+
+    Chart marks are the site's hues stepped into the band a dark surface needs
+    (OKLCH L 0.48-0.67, chroma >= 0.10): AERIS #00aa95 from --signal, the baseline
+    #f15a07 from --orange. Checked with the data-viz palette validator: worst
+    colour-blind separation dE 15.0, worst normal-vision dE 30.1, both above the
+    floors, and every mark over 3:1 against the surface. The site's bright mint and
+    lime stay as text and UI accents, where only contrast matters.
+    """
     return """
-:root { color-scheme: light;
-  --page:#f9f9f7; --surface:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --muted:#898781;
-  --grid:#e1e0d9; --axis:#c3c2b7; --border:rgba(11,11,11,.10);
-  --series-c:#2a78d6; --series-a:#eb6834; --series-b:#1baf7a; --plan:#898781;
-  --good:#0ca30c; --warning:#fab219; --serious:#ec835a; --critical:#d03b3b; --unknown:#b5b3ab;
-  --seq-0:#f0efec; --seq-1:#cde2fb; --seq-2:#86b6ef; --seq-3:#3987e5; --seq-4:#1c5cab; --seq-5:#0d366b;
-  --seq-ink-hi:#ffffff; }
-@media (prefers-color-scheme: dark) { :root { color-scheme: dark;
-  --page:#0d0d0d; --surface:#1a1a19; --ink:#ffffff; --ink2:#c3c2b7; --muted:#898781;
-  --grid:#2c2c2a; --axis:#383835; --border:rgba(255,255,255,.10);
-  --series-c:#3987e5; --series-a:#d95926; --series-b:#199e70; --unknown:#5f5e59;
-  --seq-0:#262624; --seq-1:#104281; --seq-2:#1c5cab; --seq-3:#2a78d6; --seq-4:#6da7ec; --seq-5:#cde2fb;
-  --seq-ink-hi:#0b0b0b; } }
+:root { color-scheme: dark;
+  --page:#05080b; --surface:#0a1015; --surface-2:#0e161d;
+  --ink:#edf4f2; --ink2:#9aaba8; --muted:#81918f;
+  --grid:rgba(151,190,184,.18); --axis:rgba(155,232,216,.42); --border:rgba(151,190,184,.18);
+  --accent:#9be8d8; --accent-2:#d8ff5f;
+  --series-c:#00aa95; --series-a:#f15a07; --series-b:#94494d; --plan:#81918f;
+  --good:#9be8d8; --warning:#d8ff5f; --serious:#ffb020; --critical:#ff5f57; --unknown:#5f706d;
+  --seq-0:#0e161d; --seq-1:#00372f; --seq-2:#005749; --seq-3:#007765; --seq-4:#009783; --seq-5:#07bfa7;
+  --seq-ink-hi:#05080b;
+  --font:"Space Grotesk", Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", SFMono-Regular, Consolas, monospace; }
 * { box-sizing: border-box; }
 body { margin:0; background:var(--page); color:var(--ink);
-  font:14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
-main { max-width: 1180px; margin: 0 auto; padding: 28px 20px 60px; }
-h1 { font-size: 24px; margin: 0 0 4px; } h2 { font-size: 17px; margin: 32px 0 10px; }
-p.lede { color: var(--ink2); margin: 0 0 18px; max-width: 80ch; }
-.card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+  font:14px/1.55 var(--font); -webkit-font-smoothing:antialiased;
+  background-image: radial-gradient(900px 400px at 12% -8%, rgba(155,232,216,.07), transparent 60%); }
+main { max-width: 1180px; margin: 0 auto; padding: 30px 20px 64px; }
+h1 { font-size: 27px; font-weight: 600; letter-spacing: -.02em; margin: 0 0 6px; }
+h2 { font-size: 17px; font-weight: 600; letter-spacing: -.01em; margin: 36px 0 12px;
+  padding-left: 10px; border-left: 3px solid var(--accent); }
+p.lede { color: var(--ink2); margin: 0 0 18px; max-width: 82ch; }
+a { color: var(--accent); }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
 .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
-.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; }
-.tile .k { color: var(--ink2); font-size: 12px; } .tile .v { font-size: 22px; font-weight: 600; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+.tile .k { color: var(--ink2); font-size: 12px; }
+.tile .v { font-size: 23px; font-weight: 600; letter-spacing: -.01em; margin-top: 2px; }
 .tile .s { color: var(--muted); font-size: 12px; }
 table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
-th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--grid); vertical-align: top; }
-th { color: var(--ink2); font-weight: 600; font-size: 12px; }
+th, td { text-align: left; padding: 7px 9px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+th { color: var(--accent); font-weight: 600; font-size: 11px; letter-spacing: .07em; text-transform: uppercase; }
+tbody tr:hover td { background: var(--surface-2); }
 .scroll { overflow-x: auto; }
 .legend { display:flex; gap:16px; flex-wrap:wrap; color:var(--ink2); font-size:12px; margin:6px 0; }
 .sw { display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:-2px; margin-right:6px; }
 .pass { color: var(--good); font-weight: 600; } .fail { color: var(--critical); font-weight: 600; }
-.muted { color: var(--muted); } code { font-size: 12.5px; white-space: nowrap; }
+.muted { color: var(--muted); }
+code, pre, .mono { font-family: var(--mono); font-size: 12.5px; white-space: nowrap; }
 """
+
+
+FONT_LINKS = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
+              '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
+              '<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500'
+              '&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">')
 
 
 def _pct(x):

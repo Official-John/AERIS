@@ -1,7 +1,7 @@
 """HTML report for a fault campaign: metrics tables, charts and requirement checks."""
 from html import escape
 
-from .svg import dot_latency, hbar_rates, report_css, seq_color, seq_ink
+from .svg import FONT_LINKS, dot_latency, hbar_rates, report_css, seq_color, seq_ink
 
 NAMES = {"none": "No fault", "gps_off": "GPS loss", "gps_stuck": "GPS frozen", "gps_drift": "GPS drift",
          "baro_stuck": "Barometer frozen", "mag_offset": "Magnetometer error", "imu_bias": "IMU bias",
@@ -109,7 +109,7 @@ def build(summary, checks, meta):
               "<span class='muted'>line = 95% confidence interval</span></div>")
 
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1"><title>AERIS campaign report</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>AERIS campaign report</title>{FONT_LINKS}
 <style>{report_css()}</style></head><body><main>
 <h1>AERIS fault campaign</h1>
 <p class="lede">Every scenario was flown three times with the same seed: <b>A</b> baseline autopilot only,
