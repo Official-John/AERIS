@@ -6,10 +6,10 @@ This guide assumes nothing beyond "I can open a terminal". Every command is type
 ## 1. Open a terminal in the project folder
 
 In VS Code: *File → Open Folder…* → choose the `AERIS` folder, then *Terminal → New Terminal*.
-Or in PowerShell:
+Or in PowerShell, from wherever you cloned it:
 
 ```powershell
-cd "C:\Users\ADMIN\Desktop\JOHN\Claude Works\AERIS"
+cd path\to\AERIS
 ```
 
 ## 2. Check Python
@@ -18,7 +18,7 @@ cd "C:\Users\ADMIN\Desktop\JOHN\Claude Works\AERIS"
 python --version
 ```
 
-You need 3.10 or newer (this machine has 3.11.6). If `python` isn't found, try `py`
+You need 3.10 or newer. If `python` isn't found, try `py`
 instead everywhere below. The only library needed is numpy:
 
 ```powershell
